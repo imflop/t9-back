@@ -1,15 +1,15 @@
 [tool.poetry]
 name = "t9_back"
-version = "1.0.1"
+version = "1.0.2"
 description = "Back for t9"
 authors = ["imflop <imflop@gmail.com>"]
 exclude = ["tests", "*.tests"]
 
 [tool.poetry.scripts]
-t9-back = "t9-back.__main__:main"
+t9-back = "t9_back.__main__:main"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.10"
 fastapi = "^0.75.0"
 uvicorn = {extras = ["standard"], version = "^0.17.6"}
 typer = "^0.4.0"
@@ -23,6 +23,7 @@ PyJWT = "^2.3.0"
 passlib = {extras = ["bcrypt"], version = "^1.7.4"}
 pydantic = {extras = ["email"], version = "^1.9.0"}
 qrcode = "^7.3.1"
+SQLAlchemy = "1.4.35"
 
 [tool.poetry.dev-dependencies]
 pytest-clarity = "^1.0.1"

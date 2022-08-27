@@ -5,7 +5,7 @@ from factory.alchemy import SQLAlchemyModelFactory
 from sqlalchemy import orm
 
 from t9_back.lib.dal.models.links import LinkModel
-
+from t9_back.lib.dal.models.stats import StatsModel
 
 Session = orm.scoped_session(orm.sessionmaker())
 
@@ -25,9 +25,16 @@ class BaseFactory(SQLAlchemyModelFactory):
     id = factory.PostGeneration(generate_id)
 
 
+class StatsFactory(BaseFactory):
+    class Meta:
+        model = StatsModel
+
+
 class LinkFactory(BaseFactory):
     class Meta:
         model = LinkModel
 
     original_url = factory.Faker("url")
     short_url = factory.Faker("url")
+
+    stat = factory.SubFactory(StatsFactory)

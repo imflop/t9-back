@@ -28,7 +28,7 @@ def register_routers(app: FastAPI) -> FastAPI:
 
 
 def add_origins() -> t.Sequence[str]:
-    return ("http://localhost:9000", "http://0.0.0.0:9000", "http://api:9000")
+    return "http://localhost:3000", "http://0.0.0.0:3000", "http://api:3000"
 
 
 def setup_app(settings: AppSettings) -> FastAPI:

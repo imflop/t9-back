@@ -5,6 +5,9 @@ from pydantic import BaseModel
 
 
 class Hit(BaseModel):
+    class Config:
+        orm_mode = True
+
     created_at: datetime
     ip: str
     user_agent: str
@@ -30,7 +33,7 @@ class Link(BaseModel):
     original_url: str
     short_url: str
     qr: t.Optional[str]
-    stat: Stat
+    stat: t.Optional[Stat]
 
 
 class LinkTest(BaseModel):
@@ -40,4 +43,4 @@ class LinkTest(BaseModel):
     original_url: str
     short_url: str
     qr: t.Optional[str]
-    stat: Stat
+    stat: t.Optional[Stat]

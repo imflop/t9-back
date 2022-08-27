@@ -2,7 +2,7 @@ import pytest
 
 from t9_back.lib.dal.links import LinkRepository
 
-from ...factory_boys import LinkFactory
+from ...factory_boys import LinkFactory, StatsFactory
 
 
 @pytest.fixture()
@@ -19,7 +19,7 @@ async def test_get_link_is_none(repository):
 
 @pytest.mark.asyncio
 async def test_get_link(repository):
-    link = LinkFactory.create()
+    link = LinkFactory.create(stat=StatsFactory.create())
     data = await repository.get_link(link.id)
     assert data == link
 
