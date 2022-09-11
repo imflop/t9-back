@@ -1,26 +1,23 @@
 import typing as t
 from datetime import datetime
 
-from sqlmodel import (
+from sqlalchemy import (
     Column,
-    DateTime,
-    Field,
-    Relationship,
-    SQLModel,
+    Integer,
+    DateTime
 )
+from sqlalchemy.orm import relationship
 
-if t.TYPE_CHECKING:
-    from .links import LinkModel, HitModel
+from .common import Base
+from .links import LinkModel, HitModel
 
 
-class StatsModel(SQLModel, table=True):
+class StatsModel(Base):
     __tablename__ = "link_statistics"
 
-    id: t.Optional[int] = Field(default=None, primary_key=True)
-    hits: int = Field(default=0)
-    updated_at: datetime = Field(
-        sa_column=Column(DateTime(timezone=True), default=datetime.utcnow, onupdate=datetime.utcnow), nullable=False
-    )
+    id = Column(Integer, primary_key=True)
+    hits = Column(Integer, default=0)
+    updated_at = Column(DateTime(timezone=True), default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)
 
-    link: "LinkModel" = Relationship(back_populates="stat")
-    hit_count: t.List["HitModel"] = Relationship(back_populates="stats")
+    link = relationship(LinkModel, backref="stat")
+    hit_count = relationship(HitModel, backref="stats")
