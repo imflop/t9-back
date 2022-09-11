@@ -6,9 +6,9 @@ from fastapi import (
 )
 
 from ...lib.errors import EntityDoesNotExist
-from ...lib.factories import (
+from ...lib.factories.base import settings_factory
+from ...lib.factories.services import (
     jwt_service_factory,
-    settings_factory,
     user_service_factory,
 )
 from ...lib.serializers.user import User, UserIn

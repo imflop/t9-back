@@ -16,23 +16,14 @@ ModelFilter = t.Union[LinkModel, HitModel]
 class LinkRepository:
     db: AsyncSession
 
-    # see: https://github.com/tiangolo/sqlmodel/issues/189
-    # def get_link(self, link_filter: int) -> t.Optional[LinkModel]:
-    #     stmt = select(LinkModel).where(LinkModel.id == link_filter)
-    #     return self.db.exec(stmt).first()
-
     async def get_link(self, link_filter: int) -> t.Optional[LinkModel]:
         q = select(LinkModel, StatsModel, HitModel)\
             .join(StatsModel, LinkModel.stat_id == StatsModel.id)\
             .join(HitModel, HitModel.stat_id == StatsModel.id)\
             .options(selectinload(LinkModel.stat), selectinload(StatsModel.hit_count), selectinload(StatsModel.link))\
             .where(LinkModel.id == link_filter)
-        # stmt = select(LinkModel, StatsModel).select_from(
-        #     join(LinkModel, StatsModel, LinkModel.stat)
-        #     # .join(HitModel, StatsModel, HitModel.stats)
-        # ).where(LinkModel.id == link_filter)
+
         result = await self.db.execute(q)
-        # result = await self.db.execute(stmt)
         row = result.fetchone()
 
         return row[LinkModel] if row else None

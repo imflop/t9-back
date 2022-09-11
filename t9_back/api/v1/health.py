@@ -5,7 +5,7 @@ from fastapi import (
     status,
 )
 
-from ...lib.factories import settings_factory
+from ...lib.factories.base import settings_factory
 from ...lib.settings import AppSettings
 
 

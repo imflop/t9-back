@@ -10,7 +10,7 @@ from fastapi import (
 from fastapi.responses import RedirectResponse
 from starlette.requests import Request
 
-from ...lib.factories import (
+from ...lib.factories.services import (
     link_service_factory,
     qr_service_factory,
     shorter_service_factory,
